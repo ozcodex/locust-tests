@@ -44,8 +44,9 @@ app.get('/run/:times', (req, res) => {
   }
   let factors = primeFactors(result)
   the_thing_we_are_looking_for = 
-    factors.length > 1 ? factors.reduce(sigma) : result 
-  if (the_thing_we_are_looking_for == result) console.log(result)
+    factors.length > 1 ? factors.reduce(sigma) : result;
+  if (result != 0 && the_thing_we_are_looking_for == result)
+    console.log(result);
   res.send("This is: " + the_thing_we_are_looking_for)
 });
 
