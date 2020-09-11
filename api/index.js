@@ -44,7 +44,7 @@ app.get('/run/:times', (req, res) => {
   }
   let factors = primeFactors(result)
   let the_thing_we_are_looking_for = factors.reduce(sigma)
-  req.send(the_thing_we_are_looking_for)
+  res.send("This is: " + the_thing_we_are_looking_for)
 });
 
 app.post('/login', (req, res) => {

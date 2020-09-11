@@ -11,7 +11,7 @@ class QuickstartUser(HttpUser):
     @task(3)
     def view_item(self):
         for t in range(10):
-            self.client.get(f"/run?times={t}", name="/run")
+            self.client.get(f"/run/{t}", name="/run")
             time.sleep(1)
 
     def on_start(self):
