@@ -37,13 +37,15 @@ app.get('/hello', (req, res) => {
 
 app.get('/run/:times', (req, res) => {
   let times = req.params.times;
-  let result = 1;
+  let the_thing_we_are_looking_for = 0;
+  let result = 0;
   for(let i = times; i > 0; i--){
     result = randint()*randint();
-
   }
   let factors = primeFactors(result)
-  let the_thing_we_are_looking_for = factors.reduce(sigma)
+  the_thing_we_are_looking_for = 
+    factors.length > 1 ? factors.reduce(sigma) : result 
+  if (the_thing_we_are_looking_for == result) console.log(result)
   res.send("This is: " + the_thing_we_are_looking_for)
 });
 
