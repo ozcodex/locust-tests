@@ -7,12 +7,11 @@ class QuickstartUser(HttpUser):
     @task
     def index_page(self):
         self.client.get("/hello")
-        self.client.get("/world")
 
     @task(3)
     def view_item(self):
-        for item_id in range(10):
-            self.client.get(f"/item?id={item_id}", name="/item")
+        for t in range(10):
+            self.client.get(f"/run?times={t}", name="/run")
             time.sleep(1)
 
     def on_start(self):

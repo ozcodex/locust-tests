@@ -1,2 +1,4 @@
 __pycache__/
 *.swp
+api/node_modules/*
+api/package-lock.json
