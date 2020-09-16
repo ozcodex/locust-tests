@@ -10,7 +10,7 @@ class ApiUser(HttpUser):
         f = open('config.json')
         params = json.load(f)
         f.close()
-        self.host = params['apiHost']
+        self.api = "/api/3.1/"
         self.client_id = params['apiClientId']
         self.client_secret = params['apiClientSecret']
         self.login()
@@ -19,11 +19,15 @@ class ApiUser(HttpUser):
         self.logout()
 
     def login(self):
-        url = '{}{}'.format(self.host, 'login')
+        url = '{}{}'.format(self.api, 'login')
         params = {'client_id': self.client_id,
                   'client_secret': self.client_secret}
+        print(url)
         with self.client.post(url,params=params,catch_response=True) as res:
+            print(res.status_code)
+            print(res.request.url)
             access_token = res.json().get('access_token')
+            print("Connected!",access_token)
         self.client.headers.update({'Authorization': 'token {}'.format(access_token)})
 
     def logout(self):
@@ -31,9 +35,7 @@ class ApiUser(HttpUser):
 
     @task(1)
     def get_look(self):
-        # Choose a random look to retrieve results for:
-        max_look_id = 10  # This is the maximum look ID on my instance - update it as appropriate
-        look_to_get = random.randint(1, max_look_id)
+        look_to_get = 0
         url = '{}{}/{}/run/{}'.format(self.host, 'looks', look_to_get, 'json')
 
         params = {'limit': 100000}
