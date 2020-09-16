@@ -6,7 +6,6 @@ class ApiUser(HttpUser):
     wait_time = between(1, 5)
 
     def on_start(self):
-        global options
         f = open('config.json')
         params = json.load(f)
         f.close()
@@ -14,34 +13,47 @@ class ApiUser(HttpUser):
         self.client_id = params['apiClientId']
         self.client_secret = params['apiClientSecret']
         self.login()
+        self.load_looks()
 
     def on_stop(self):
         self.logout()
 
     def login(self):
-        url = '{}{}'.format(self.api, 'login')
+        url = '{}/{}'.format(self.api, 'login')
         params = {'client_id': self.client_id,
                   'client_secret': self.client_secret}
         print(url)
         with self.client.post(url,params=params,catch_response=True) as res:
-            print(res.status_code)
-            print(res.request.url)
-            access_token = res.json().get('access_token')
-            print("Connected!",access_token)
-        self.client.headers.update({'Authorization': 'token {}'.format(access_token)})
+            if res.status_code == requests.codes.ok:
+                access_token = res.json().get('access_token')
+                self.client.headers.update({'Authorization': 'token {}'.format(access_token)})
+            else:
+                raise NameError('Unauthorized');
 
     def logout(self):
+        self.client.headers.update({'Authorization': 'token null'})
         return
+
+    def load_looks(self):
+        url = '{}/{}'.format(self.api, 'looks')
+        params = {}
+        with self.client.get(url,params=params) as res:
+            if res.status_code == requests.codes.ok:
+                data = res.json()
+                self.looks = list(map(lambda look: look['id'],data))
+                print(self.looks)
+            else:
+                raise NameError('Error getting the ')
 
     @task(1)
     def get_look(self):
-        look_to_get = 0
-        url = '{}{}/{}/run/{}'.format(self.host, 'looks', look_to_get, 'json')
+        look_to_get = 1
+        url = '{}/{}/{}'.format(self.api, 'looks', look_to_get)
 
-        params = {'limit': 100000}
-        with self.client.get(url, params=params, stream=True) as r:
-            if r.status_code == requests.codes.ok:
+        params = {'limit': 1000}
+        with self.client.get(url, params=params, stream=True) as res:
+            if res.status_code == requests.codes.ok:
                 print(url + ': success (200)')
             else:
-                print(url + ': failure (' + str(r.status_code) + ')')
+                print(url + ': failure (' + str(res.status_code) + ')')
 
