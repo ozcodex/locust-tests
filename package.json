@@ -1,0 +1,23 @@
+{
+  "name": "locust-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "lever-conf": "github:lever/conf-client"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozcodex/locust-tests.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ozcodex/locust-tests/issues"
+  },
+  "homepage": "https://github.com/ozcodex/locust-tests#readme"
+}
