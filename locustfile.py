@@ -1,6 +1,7 @@
 from locust import HttpUser, task, between
 import requests
 import json
+import random
 
 class ApiUser(HttpUser):
     wait_time = between(1, 5)
@@ -47,10 +48,10 @@ class ApiUser(HttpUser):
 
     @task(1)
     def get_look(self):
-        look_to_get = 1
+        look_to_get = random.choice(self.looks)
         url = '{}/{}/{}'.format(self.api, 'looks', look_to_get)
 
-        params = {'limit': 1000}
+        params = {'limit': 10000}
         with self.client.get(url, params=params, stream=True) as res:
             if res.status_code == requests.codes.ok:
                 print(url + ': success (200)')
