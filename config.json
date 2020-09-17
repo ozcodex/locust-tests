@@ -1,1 +1,0 @@
-{ "apiClientId": "jGTkXnJ4b2pHKRB4dP2f", "apiClientSecret": "K7FCjYGXzSRNrrkRnNKpmBd2", "apiHost": "leverincdev.api.looker.com", "clientSecret": "6b3331752d74670acb7f8bdbe9c782915220b9794715e7cd44df8c3bdd4f8198", "host": "looker.lever.dev", "models": [ "lever_reporting" ], "verifySSL": true }
