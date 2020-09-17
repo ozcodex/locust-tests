@@ -58,3 +58,4 @@ class ApiUser(HttpUser):
             else:
                 print(url + ': failure (' + str(res.status_code) + ')')
 
+
