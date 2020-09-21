@@ -28,8 +28,9 @@ class ApiUser(HttpUser):
                 raise NameError('Unauthorized');
 
     def load_looks(self):
+        #TODO: move this to pre-run file and load from config file.
         url = '{}/{}'.format(self.api, 'looks')
-        params = {}
+        params = {'fields':'id'}
         with self.client.get(url,params=params) as res:
             if res.status_code == requests.codes.ok:
                 data = res.json()
@@ -41,11 +42,18 @@ class ApiUser(HttpUser):
     def get_look(self):
         look_to_get = random.choice(self.looks)
         url = '{}/{}/{}'.format(self.api, 'looks', look_to_get)
-        params = {}
+        #TODO: define another params
+        params = {'limit': 10000}
         with self.client.get(url, params=params, stream=True) as res:
             if res.status_code == requests.codes.ok:
                 print(url + ': success (200)')
             else:
                 print(url + ': failure (' + str(res.status_code) + ')')
+        #TODO: catch 403 error and login again
 
+# Other TODO:
+# how to run distributed
+# how to run production looks
+# is cache-ing the querys? or was just the 403
+#
 

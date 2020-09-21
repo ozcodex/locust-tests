@@ -32,6 +32,9 @@ host, the host is in the config.json file, but for now I'm using:
 
 `https://leverincdev.api.looker.com/`
 
+If you want to run it distributed, one node must be the master node, this one
+will no run tests, but will provide all the connections with the nodes and
+the web interface.
 
 Development
 ----------------------------------------
