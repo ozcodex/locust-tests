@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "lever-conf": "github:lever/conf-client"
+    "lever-conf": "github:lever/conf-client",
+    "lever-ts-dev": "^2.0.1",
+    "request": "^2.88.2",
+    "tsc": "^1.20150623.0"
   },
   "devDependencies": {},
   "scripts": {
