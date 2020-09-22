@@ -2,4 +2,4 @@ __pycache__/
 *.swp
 node_modules/
 data.json
-config.json
+locust_config.json
