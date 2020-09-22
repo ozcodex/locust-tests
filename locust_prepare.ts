@@ -1,17 +1,29 @@
-const fetchprivate = require('lever-conf/fetchprivate');
-const fs = require('fs');
-const request = require('request');
+import * as fetchprivate from 'lever-conf/fetchprivate';
+import * as fs from 'fs';
+import * as request from 'request';
 
 interface Conf {
-  
+  apiClientId: string;
+  apiClientSecret: string;
+  apiHost: string;
+  clientSecret: string;
+  host: string;
+  models: string[];
+  verifySSL: boolean;
+  looks?: string[];
 }
 
-function loadLooks(conf) {
+function loadLooks(conf: Conf): Promise<strign[]> {
   return new Promise((resolve, reject) => {
-    request('http://www.google.com', function (error, response, body) {
-      console.error('error:', error); // Print the error if one occurred
-      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-      console.log('body:', body); // Print the HTML for the Google homepage.
+    let url: string = conf.apiHost + '/login';
+    let params: { client_id: string; client_secret: string } = {
+      client_id: conf.apiClientId,
+      client_secret: apiClientSecret,
+    };
+    request({ url: url, qs: params }, function (error, response, body) {
+      console.error('error:', error);
+      console.log('statusCode:', response && response.statusCode);
+      console.log('body:', body);
     });
   });
 }

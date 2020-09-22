@@ -3,3 +3,4 @@ __pycache__/
 node_modules/
 data.json
 locust_config.json
+locust_prepare.js

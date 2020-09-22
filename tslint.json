@@ -1,0 +1,3 @@
+{
+  "extends": "lever-ts-dev/tslint.json"
+}

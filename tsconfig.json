@@ -1,0 +1,9 @@
+{
+  "extends": "lever-ts-dev/tsconfig-lever.json",
+  "compilerOptions": {
+    "composite": true,
+    "target": "es6"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["test/**", "node_modules/**"]
+}
